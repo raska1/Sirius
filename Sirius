@@ -1,0 +1,117 @@
+from rapidfuzz import process, fuzz # импортируем библиотеку fuzz
+
+# вводим переменную imageListWithDialogue и добавляем в неё диологи из PhotoChat
+imageListWithDialogue = [
+  {
+    "dialogue": [
+      {
+        "message": "How are you?",
+        "share_photo": False,
+        "user_id": 1
+      },
+      {
+        "message": "I'm good. I just got back from the grand reopening of a resort in Vegas.",
+        "share_photo": False,
+        "user_id": 0
+      },
+      {
+        "message": "whoa",
+        "share_photo": False,
+        "user_id": 1
+      },
+      {
+        "message": "Share the photo",
+        "share_photo": False,
+        "user_id": 0
+      },
+    ],
+    "dialogue_id": 0,
+    "photo_description": "Objects in the photo: Drink, Head, Face, Hair",
+    "photo_url": "https://farm7.staticflickr.com/3948/15705071685_5d905852c2_o.jpg",
+    "photo_id": "train/29bedd00fb2be056"
+  },
+  {
+    "dialogue": [
+      {
+        "message": "What are you up too?",
+        "share_photo": False,
+        "user_id": 1
+      },
+      {
+        "message": "Just relaxing at home and you?",
+        "share_photo": False,
+        "user_id": 0
+      },
+      {
+        "message": "Just finishing up some laundry I didn't get to yesterday!",
+        "share_photo": False,
+        "user_id": 1
+      },
+      {
+        "message": "Share the photo",
+        "share_photo": False,
+        "user_id": 0
+      },
+    ],
+    "dialogue_id": 1,
+    "photo_description": "The photo has your dad Mark. Objects in the photo: Clothing, Face, Man",
+    "photo_url": "https://c7.staticflickr.com/8/7083/6989614068_bf3cbb8041_o.jpg",
+    "photo_id": "train/b6e646c13d0753ae"
+  },
+  {
+    "dialogue": [
+      {
+        "message": "Hello!",
+        "share_photo": False,
+        "user_id": 1
+      },
+      {
+        "message": "Hey how are you?",
+        "share_photo": False,
+        "user_id": 0
+      },
+      {
+        "message": "I am great! What is it that you would like to discuss?",
+        "share_photo": False,
+        "user_id": 1
+      },
+      {
+        "message": "Share the photo",
+        "share_photo": False,
+        "user_id": 1
+      },
+    ],
+    "dialogue_id": 2,
+    "photo_description": "Objects in the photo: Dessert, Snack, Baked goods, Cookie",
+    "photo_url": "https://c3.staticflickr.com/6/5250/5273985737_c0f0e3c247_o.jpg",
+    "photo_id": "test/4483bbdd3241f11a"
+  },
+]
+
+dictionary = {} # вводим переменную dictionary
+
+# добавляем циклом в переменную text диалоги
+for item in imageListWithDialogue:
+    text = ""
+    for dialog in item["dialogue"]:
+        text += dialog["message"]
+    dictionary[text] = item["photo_url"]
+print(dictionary)
+
+# реплика человека
+s2 = "Hello! how are you? I am great! What is it that you would like Share the photo"
+
+# вводим переменные
+maxPercent = 0
+maxKey = ""
+percent = ""
+
+# находим самую схожую реплиу с репликой человека
+for key in dictionary.keys():
+  percent = fuzz.ratio(dictionary[key], s2)
+  if percent > maxPercent:
+    maxPercent = percent
+    maxKey = key
+
+# выводим
+print(dictionary[maxKey])
