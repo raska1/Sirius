@@ -99,7 +99,7 @@ for item in imageListWithDialogue:
 print(dictionary)
 
 # реплика человека
-s2 = "Hello! how are you? I am great! What is it that you would like Share the photo"
+s2 = "Hello! How are you? I am great! What is it that you would like? Share the photo!"
 
 # вводим переменные
 maxPercent = 0
